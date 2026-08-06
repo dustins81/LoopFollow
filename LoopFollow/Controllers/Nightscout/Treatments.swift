@@ -77,6 +77,13 @@ extension MainViewController {
                 bolus.append(entry)
             case "Carb Correction":
                 carbs.append(entry)
+            case "Combo Bolus":
+                // Tandem pumps (via tconnectsync) upload extended boluses as
+                // "Combo Bolus" carrying both carbs and insulin; without this
+                // case they fall through `default:` and vanish from the graph
+                // and the Carbs-today count.
+                carbs.append(entry)
+                bolus.append(entry)
             case "Temporary Override", "Exercise":
                 temporaryOverride.append(entry)
             case "Temporary Target":
